@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  #VALIDATIONS
+  # VALIDATIONS
   validates :username, :email, :password, presence: true
   validates :username, :email, uniqueness: true
 
@@ -11,20 +11,15 @@ class User < ApplicationRecord
   has_many :reported_bugs, class_name: 'Bugs', foreign_key: 'reporter_id', dependent: :destroy, inverse_of: :user
   has_many :assigned_bugs, class_name: 'Bugs', foreign_key: 'assignee_id', dependent: :destroy, inverse_of: :user
 
-
   def manager?
-    if self.type=="Manager"
-      true
-    end
+    true if type == 'Manager'
   end
+
   def qa?
-    if self.type=="QA"
-      true
-    end
+    true if type == 'QA'
   end
+
   def developer?
-    if self.type=="Developer"
-      true
-    end
+    true if type == 'Developer'
   end
 end
