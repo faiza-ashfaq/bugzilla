@@ -2,6 +2,7 @@
 
 class Project < ApplicationRecord
   # VALIDATIONS
+  validates :name, presence: true
   validates :user_id, numericality: true
   validates_with ProjectValidator
 

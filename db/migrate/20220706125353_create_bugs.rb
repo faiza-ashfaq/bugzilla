@@ -3,7 +3,7 @@
 class CreateBugs < ActiveRecord::Migration[5.2]
   def change
     create_table :bugs do |t|
-      t.string :title, null: false
+      t.string :title, index: { unique: true }
       t.datetime :deadline
       t.string :screenshot
       t.integer :b_type, null: false

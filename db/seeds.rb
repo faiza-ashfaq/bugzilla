@@ -7,7 +7,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first
-Manager.create(username: 'Man', email: 'dada', password: 'dadsa')
-pr = Project.create(user_id: 1)
-pr.users << Developer.create(username: 'Dev', email: 'dadaass', password: 'dadsa')
-pr.users << QA.create(username: 'QA', email: 'dadaaaaaaa', password: 'dadsa')
+#Manager.create(username: 'Man', email: 'dada', password: 'dadsa')
+#Manager.create(username: 'Mana', email: 'dadaa', password: 'dadsa')
+
+#pr = Project.create(user_id: 1)
+#pr.users << Developer.create(username: 'Dev', email: 'dadaass', password: 'dadsa')
+#pr.users << QA.create(username: 'QA', email: 'dadaaaaaaa', password: 'dadsa')
