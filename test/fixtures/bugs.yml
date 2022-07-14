@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  deadline: 
+  screenshot: MyString
+  type: 1
+  status: 1
+
+two:
+  title: MyString
+  deadline: 
+  screenshot: MyString
+  type: 1
+  status: 1
