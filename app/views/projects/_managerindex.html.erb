@@ -1,0 +1,25 @@
+<h1>Hi, <%= current_manager.username %> </h1>
+<h3>Manager</h3>
+
+<button type="button" class="btn btn-light"><%= link_to 'Create a new project', new_project_path %></button>
+
+<h1>Your Projects</h1>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

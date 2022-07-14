@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'welcome#index'
+  root 'projects#index'
+  devise_for :users, controllers: {sessions: "sessions"}
   devise_for :managers
   devise_for :developers
   devise_for :qas

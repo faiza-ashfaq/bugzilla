@@ -1,0 +1,11 @@
+<% if manager_signed_in? %>
+ <%= render 'managerindex' %>
+<% elsif developer_signed_in? %>
+ <%= render 'devindex' %>
+<% elsif qa_signed_in? %>
+ <%= render 'qaindex' %>
+<% else %>
+  <div>
+    <h2>Welcome to Bugzilla!</h2>
+  </div>
+<% end %>
