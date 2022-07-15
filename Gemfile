@@ -38,11 +38,11 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
+gem 'devise'
 gem 'jquery-rails'
+gem 'pundit'
 gem 'sassc-rails'
 group :development, :test do
-  gem 'devise'
-  gem 'pundit'
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'

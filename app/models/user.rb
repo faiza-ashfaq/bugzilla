@@ -26,8 +26,4 @@ class User < ApplicationRecord
   def developer?
     type == 'Developer'
   end
-
-  def email_required?
-    false
-  end
 end

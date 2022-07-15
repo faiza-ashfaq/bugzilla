@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class SessionsController < Devise::SessionsController
+class Users::SessionsController < Devise::SessionsController
   def create
-    rtn = super
+    run_s = super
     sign_in(resource.type.underscore, resource.type.constantize.send(:find, resource.id)) unless resource.type.nil?
-    rtn
+    run_s
   end
 end

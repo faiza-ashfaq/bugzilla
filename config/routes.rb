@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   root 'projects#index'
-  devise_for :users, controllers: {sessions: "sessions"}
+  devise_for :users, controllers: {sessions: "users/sessions", registerations: "users/registerations"}
   devise_for :managers
   devise_for :developers
   devise_for :qas

@@ -1,3 +1,33 @@
 // Place all the styles related to the projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #d6d6d6;
+	box-shadow: 0 0 4px rgba(0,0,0,.1);
+}
+.cmp-title {
+	font-size: 26px;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	font-weight: 900;
+}
+.nav-item {
+	margin: 5px;
+  font-size: 16px;
+  font-weight: 800;
+	align-self: center;
+}
+
+.navbar-link {
+	margin: 5px;
+  font-size: 16px;
+  font-weight: 800;
+	align-self: center;
+}
+.btn {
+  margin-top: 10px;
+}
