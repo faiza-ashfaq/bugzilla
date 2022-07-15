@@ -6,7 +6,7 @@ class CreateBugs < ActiveRecord::Migration[5.2]
       t.string :title, index: { unique: true }
       t.datetime :deadline
       t.string :screenshot
-      t.integer :b_type, null: false
+      t.integer :bug_type, null: false
       t.integer :status, null: false
 
       t.timestamps

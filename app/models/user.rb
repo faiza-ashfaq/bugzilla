@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # DEVISE MODES
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
+
   # VALIDATIONS
   validates :username, :email, :type, presence: true
   validates :username, :email, uniqueness: true
@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_many :reported_bugs, class_name: 'Bugs', foreign_key: 'reporter_id', dependent: :destroy, inverse_of: :user
   has_many :assigned_bugs, class_name: 'Bugs', foreign_key: 'assignee_id', dependent: :destroy, inverse_of: :user
 
+  # SCOPES
+  scope :by_title, ->(title) { where(type: title) }
+
+  # FUNCTIONS
   def manager?
     type == 'Manager'
   end

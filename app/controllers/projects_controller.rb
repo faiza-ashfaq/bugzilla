@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html {flash[:notice] = 'Project was successfully destroyed.'}
+      format.html { flash[:notice] = 'Project was successfully destroyed.' }
       format.js
     end
   end

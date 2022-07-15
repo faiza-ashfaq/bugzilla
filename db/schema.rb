@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2022_07_07_092804) do
     t.string "title"
     t.datetime "deadline"
     t.string "screenshot"
-    t.integer "b_type", null: false
+    t.integer "bug_type", null: false
     t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
