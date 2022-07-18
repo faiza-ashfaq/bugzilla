@@ -60,6 +60,8 @@ module Users
         params.require(:developer).permit(:username, :email, :password, :password_confirmation)
       elsif (params.has_key?(:qa))
         params.require(:qa).permit(:username, :email, :password, :password_confirmation)
+      elsif (params.has_key?(:manager))
+        params.require(:manager).permit(:username, :email, :password, :password_confirmation)
       end
     end
 
@@ -68,6 +70,8 @@ module Users
         params.require(:developer).permit(:username, :email, :password, :password_confirmation, :current_password)
       elsif (params.has_key?(:qa))
         params.require(:qa).permit(:username, :email, :password, :password_confirmation, :current_password)
+      elsif (params.has_key?(:manager))
+        params.require(:manager).permit(:username, :email, :password, :password_confirmation, :current_password)
       end
 
     end
