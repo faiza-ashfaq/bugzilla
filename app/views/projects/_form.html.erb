@@ -18,10 +18,9 @@
 
   <div class="form-group">
     <%= form.label :developers, "Software Developers",  class: "form-label" %>
-     <%= collection_select(:users, :id, @all_books, :id, :name, {}, {:multiple => true}) %>
-    <%= form.collection_select :user_id, User.by_title("Developer"), :id, :username, {include_blank: false}, {multiple: true} %>
+    <%= form.collection_select :user_id,  @devs, :id, :username, {include_blank: false}, {multiple: true} %>
     <%= form.label :qas, "Software Quality Assurance Engineers", class: "form-label" %>
-    <%= form.collection_select :user_id, User.by_title("Qa"), :id, :username, {include_blank: false}, {multiple: true} %>
+    <%= form.collection_select :user_id, @qas, :id, :username, {include_blank: false}, {multiple: true} %>
   </div>
 
   <%= form.submit "Submit", class: "btn btn-default btn-primary" %>
