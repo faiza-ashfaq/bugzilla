@@ -2,9 +2,7 @@
 
 class BugValidator < ActiveModel::Validator
   def validate(record)
-    if !User.find(record.assignee_id).developer? && !(User.find(record.reporter_id).qa? &&
-      record.errors.add('Assignee is not a Developer!'))
-      record.errors.add('Reporter is not a QA!')
-    end
+    record.errors.add('Assignee is not a Developer!') unless User.find(record.assignee_id).developer?
+    record.errors.add('Reporter is not a QA!') unless User.find(record.reporter_id).qa?
   end
 end

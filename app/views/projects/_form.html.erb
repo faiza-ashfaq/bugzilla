@@ -1,0 +1,28 @@
+<%= form_with(model: project, local: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name,  class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :developers, "Software Developers",  class: "form-label" %>
+     <%= collection_select(:users, :id, @all_books, :id, :name, {}, {:multiple => true}) %>
+    <%= form.collection_select :user_id, User.by_title("Developer"), :id, :username, {include_blank: false}, {multiple: true} %>
+    <%= form.label :qas, "Software Quality Assurance Engineers", class: "form-label" %>
+    <%= form.collection_select :user_id, User.by_title("Qa"), :id, :username, {include_blank: false}, {multiple: true} %>
+  </div>
+
+  <%= form.submit "Submit", class: "btn btn-default btn-primary" %>
+<% end %>

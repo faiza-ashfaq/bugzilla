@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+	<p><span class="cmp-title">Bugzilla</span></p>
+	<button type="button" class="pull-left navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a><%= link_to "Home", root_path %></a> |
+      <% if manager_signed_in? %>
+        <a><%= link_to 'Edit profile', edit_manager_registration_path, :class => 'navbar-link' %></a> |
+        <a><%= link_to 'Log out', destroy_manager_session_path, method: :delete %></a>
+      <% elsif developer_signed_in? %>
+        <a><%= link_to 'Edit profile', edit_developer_registration_path, :class => 'navbar-link' %></a> |
+        <a><%= link_to 'Log out', destroy_developer_session_path, method: :delete %></a>
+      <% elsif qa_signed_in? %>
+        <a><%= link_to 'Edit profile', edit_qa_registration_path, :class => 'navbar-link' %></a> |
+        <a><%= link_to 'Log out', destroy_qa_session_path, method: :delete %></a>
+        </li>
+      <%else%>
+        <li class="nav-item dropdown">
+          <a class="navbar-link dropdown-toggle nav-item" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sign Up</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item"><%= link_to "Developer", new_developer_registration_path, :class => 'navbar-link'  %></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item"> <%= link_to "SQA", new_qa_registration_path, :class => 'navbar-link'  %> </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          | <a><%= link_to "Login", new_user_session_path %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

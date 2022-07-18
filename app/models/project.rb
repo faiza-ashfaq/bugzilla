@@ -2,6 +2,7 @@
 
 class Project < ApplicationRecord
   # VALIDATIONS
+  validates :name, presence: true
   validates :user_id, numericality: true
   validates_with ProjectValidator
 
@@ -10,5 +11,16 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :bugs, dependent: :destroy
 
-  scope :by_title, ->(title) { joins(:users).where(users: { type: title }) }\
+  # FUNCTIONS
+  def developers
+    users.select { |x| x.type == 'Developer' }
+  end
+
+  def qas
+    users.select { |x| x.type == 'QA' }
+  end
+
+  def creator
+    user
+  end
 end
