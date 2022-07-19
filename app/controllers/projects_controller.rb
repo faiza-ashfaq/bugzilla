@@ -5,16 +5,13 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    if current_user
-      @uProjects = current_user.projects
-    end
+    @user_projects = current_user.projects if current_user
     authorize @projects
   end
 
   def new
     @project = Project.new
-    @devs = User.where.not(id: @project.users.collect(&:id)).by_title("Developer")
-    @qas = User.where.not(id: @project.users.collect(&:id)).by_title("Qa")
+    @devs, @qas = unassigned_user
     authorize @project
   end
 
@@ -33,13 +30,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @devs = User.where.not(id: @project.users.collect(&:id)).by_title("Developer")
-    @qas = User.where.not(id: @project.users.collect(&:id)).by_title("Qa")
+    @devs, @qas = unassigned_user
   end
 
   def update
-
-    @users_projects = params.require(:project).permit(user_id: [])
+    @users_projects = user_params
     if @project.update(project_params)
       add_user_to_projects(@users_projects, @project)
       authorize @project
@@ -62,7 +57,6 @@ class ProjectsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.find(params[:id])
   rescue ActiveRecord::RecordNotFound
@@ -70,9 +64,12 @@ class ProjectsController < ApplicationController
     redirect_to new_project_url
   end
 
-  # Only allow a list of trusted parameters through.
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def user_params
+    params.require(:project).permit(user_id: [])
   end
 
   def assign_manager
@@ -82,6 +79,13 @@ class ProjectsController < ApplicationController
       flash[:alert] = 'Manager not signed in'
       redirect_to new_user_session_path
     end
+  end
+
+  def unassigned_user
+    unassigned_users = User.where.not(id: @project.users.collect(&:id))
+    devs = unassigned_users.by_title('Developer')
+    qas = unassigned_users.by_title('Qa')
+    [devs, qas]
   end
 
   def add_user_to_projects(users_projects, proj)
@@ -94,7 +98,6 @@ class ProjectsController < ApplicationController
   end
 
   def current_user
-    #byebug
     current_manager || current_developer || current_qa
   end
 end

@@ -8,24 +8,30 @@ class BugsController < ApplicationController
   end
 
   def new
-    @bug = @project.projects.build
+    @bug = @project.bugs.build
   end
 
   def create
-    @bug = @project.projects.build(bug_params)
+    @bug = @project.bugs.build(bug_params)
     if @bug.save
-      flash[:notice] = "Bug added successfully"
+      flash[:notice] = 'Bug added successfully'
       redirect_to project_bugs_path(@project)
+    else
+      flash[:alert] = 'Bug failed'
+      render 'new'
+    end
   end
 
-
   private
+
   def get_project
     @project = Project.find(params[:project_id])
   end
+
   def bug_params
     params.require(:project).permit(:name)
   end
+
   def set_bug
     @bug = @project.bugs.find(params[:id])
   end

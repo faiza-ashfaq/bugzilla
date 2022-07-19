@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectPolicy < ApplicationPolicy
   attr_reader :user, :project
 
@@ -19,17 +21,11 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    #byebug
+    # byebug
     return true if user.manager? && user == project.user
   end
 
   def destroy?
     return true if user.manager? && user == project.user
   end
-
-  private
-
-    def project
-      record
-    end
 end
