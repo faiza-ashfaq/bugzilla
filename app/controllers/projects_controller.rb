@@ -5,16 +5,14 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    if current_user
-      @uProjects = current_user.projects
-    end
+    @u_projects = current_user.projects if current_user
     authorize @projects
   end
 
   def new
     @project = Project.new
-    @devs = User.where.not(id: @project.users.collect(&:id)).by_title("Developer")
-    @qas = User.where.not(id: @project.users.collect(&:id)).by_title("Qa")
+    @devs = User.where.not(id: @project.users.collect(&:id)).by_title('Developer')
+    @qas = User.where.not(id: @project.users.collect(&:id)).by_title('Qa')
     authorize @project
   end
 
@@ -33,12 +31,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @devs = User.where.not(id: @project.users.collect(&:id)).by_title("Developer")
-    @qas = User.where.not(id: @project.users.collect(&:id)).by_title("Qa")
+    @devs = User.where.not(id: @project.users.collect(&:id)).by_title('Developer')
+    @qas = User.where.not(id: @project.users.collect(&:id)).by_title('Qa')
   end
 
   def update
-
     @users_projects = params.require(:project).permit(user_id: [])
     if @project.update(project_params)
       add_user_to_projects(@users_projects, @project)
@@ -94,7 +91,7 @@ class ProjectsController < ApplicationController
   end
 
   def current_user
-    #byebug
+    # byebug
     current_manager || current_developer || current_qa
   end
 end
