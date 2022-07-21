@@ -16,9 +16,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
-    @users_projects = params.require(:project).permit(user_id: [])
-    assign_manager
+    @project = ProjectCreator.call(params, current_manager)
+    @users_projects = user_params
     authorize @project
     if @project.save
       add_user_to_projects(@users_projects, @project)
@@ -35,9 +34,9 @@ class ProjectsController < ApplicationController
 
   def update
     @users_projects = user_params
+    authorize @project
     if @project.update(project_params)
       add_user_to_projects(@users_projects, @project)
-      authorize @project
       flash[:notice] = 'Project Successfully Updated'
       redirect_to root_url
     else
@@ -45,7 +44,10 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @devs = @project.developers
+    @qas = @project.qas
+  end
 
   def destroy
     @project.destroy
@@ -64,21 +66,8 @@ class ProjectsController < ApplicationController
     redirect_to new_project_url
   end
 
-  def project_params
-    params.require(:project).permit(:name)
-  end
-
   def user_params
     params.require(:project).permit(user_id: [])
-  end
-
-  def assign_manager
-    if current_manager
-      @project.user_id = current_manager.id
-    else
-      flash[:alert] = 'Manager not signed in'
-      redirect_to new_user_session_path
-    end
   end
 
   def unassigned_user

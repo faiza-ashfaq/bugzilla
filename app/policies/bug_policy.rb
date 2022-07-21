@@ -3,9 +3,9 @@
 class ProjectPolicy < ApplicationPolicy
   attr_reader :user, :project
 
-  def initialize(user, project)
+  def initialize(user, _project)
     @user = user
-    @project = project
+    @bug = bug
   end
 
   def index?
@@ -13,18 +13,18 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
-    user.manager?
+    user.qa?
   end
 
   def new?
-    user.manager?
+    user.qa?
   end
 
   def update?
-    return true if user.manager? && user == project.user
+    return true if user.qa? && user == bug.user
   end
 
   def destroy?
-    return true if user.manager? && user == project.user
+    return true if user.qa? && user == bug.user
   end
 end

@@ -1,8 +1,46 @@
 
-
 <p>
   <strong>Name:</strong>
   <%= @project.name %>
+</p>
+
+<p>
+  <strong>Developers Assigned</strong>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+
+    <% @devs.each do |dev| %>
+      <tbody>
+        <tr>
+          <td><%= dev.username %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+
+<p>
+  <strong>QA's Assigned</strong>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+
+    <% @qas.each do |qa| %>
+      <tbody>
+        <tr>
+          <td><%= qa.username %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

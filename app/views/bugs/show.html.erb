@@ -1,0 +1,8 @@
+<%= @bug.title %>
+
+<% if @bug.ss_image.attached? %>
+<%= cl_image_tag(@bug.ss_image.key, width: 300, height: 200) %>
+<% end %>
+
+<%= link_to 'Edit', edit_project_bug_path(@project, @bug) %> |
+<%= link_to 'Back', root_path %>
