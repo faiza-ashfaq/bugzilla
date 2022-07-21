@@ -32,3 +32,8 @@ Lint/AmbiguousBlockAssociation:
 
 Style/Documentation:
   Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/policies/**/*'
+
