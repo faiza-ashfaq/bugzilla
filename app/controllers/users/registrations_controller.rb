@@ -57,19 +57,22 @@ module Users
     private
     def sign_up_params
       if (params.has_key?(:developer))
-        params.require(:developer).permit(:username, :email, :password, :password_confirmation)
+        params.require(:developer)
       elsif (params.has_key?(:qa))
-        params.require(:qa).permit(:username, :email, :password, :password_confirmation)
-      end
+        params.require(:qa)
+      elsif (params.has_key?(:manager))
+        params.require(:manager)
+      end.permit(:username, :email, :password, :password_confirmation)
     end
 
     def account_update_params
       if (params.has_key?(:developer))
-        params.require(:developer).permit(:username, :email, :password, :password_confirmation, :current_password)
+        params.require(:developer)
       elsif (params.has_key?(:qa))
-        params.require(:qa).permit(:username, :email, :password, :password_confirmation, :current_password)
-      end
-
+        params.require(:qa)
+      elsif (params.has_key?(:manager))
+        params.require(:manager)
+      end.permit(:username, :email, :password, :password_confirmation, :current_password)
     end
   end
 end

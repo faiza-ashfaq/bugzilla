@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def qa?
-    type == 'QA'
+    type == 'Qa'
   end
 
   def developer?

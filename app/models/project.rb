@@ -13,11 +13,11 @@ class Project < ApplicationRecord
 
   # FUNCTIONS
   def developers
-    users.select { |x| x.type == 'Developer' }
+    users.select(&:developer?)
   end
 
   def qas
-    users.select { |x| x.type == 'QA' }
+    users.select(&:qa?)
   end
 
   def creator

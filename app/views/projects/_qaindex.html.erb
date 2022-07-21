@@ -1,3 +1,43 @@
 <h1>Software Quality Assurance</h1>
 <h1>Hi, <%= current_user.username %> </h1>
 <%= puts current_qa.username %>
+
+<h3>Your Projects</h3>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <% @uProjects.each do |project| %>
+    <tbody id="delProj<%= project.id %>">
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= link_to 'Report a bug', project %></td>
+        <td><%= link_to 'View Bugs', edit_project_path(project) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>All Projects</h3>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <% @projects.each do |project| %>
+    <tbody id="delProj<%= project.id %>">
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= link_to 'Report a bug', project %></td>
+        <td><%= link_to 'View Bugs', edit_project_path(project) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
