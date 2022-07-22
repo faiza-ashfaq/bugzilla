@@ -67,6 +67,10 @@ class ProjectsController < ApplicationController
     redirect_to new_project_url
   end
 
+  def project_params
+    params.require(:project).permit(:name)
+  end
+
   def user_params
     params.require(:project).permit(user_id: [])
   end

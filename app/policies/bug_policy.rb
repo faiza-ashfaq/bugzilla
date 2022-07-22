@@ -28,11 +28,11 @@ class BugPolicy < ApplicationPolicy
     return true if user.qa? && user == bug.user
   end
 
-  def resolve
+  def resolve?
     user.developer?
   end
 
-  def assign_dev
+  def assign_dev?
     user.developer?
   end
 end
