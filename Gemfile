@@ -39,10 +39,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
 gem 'cloudinary'
 gem 'devise'
+gem 'figaro'
 gem 'jquery-rails'
 gem 'pg'
 gem 'pundit'
 gem 'sassc-rails'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'

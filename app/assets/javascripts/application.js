@@ -22,7 +22,7 @@ $(document).on("change", "#bugs", function(){
   let bugs = $("#bugs :selected").text();
  // console.log(bugs)
   $.ajax({
-    url: "/projects/1/bugs/new",
+    url: "/projects/1/bugs/update_status",
     method: "GET",
     dataType: "json",
     data: {bugs: bugs},

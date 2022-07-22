@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @user_projects = current_user.projects if current_user
+    @dev_bugs = current_developer.assigned_bugs.has_not_ended if current_developer
     authorize @projects
   end
 
