@@ -5,11 +5,19 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
-  devise_for :managers
+  devise_for :managers, controllers: { registrations: 'users/registrations' }
   devise_for :developers, controllers: { registrations: 'users/registrations' }
   devise_for :qas, controllers: { registrations: 'users/registrations' }
   resources :projects do
-    resources :bugs
+    resources :bugs do
+      member do
+        post :assign_dev
+        post :resolve
+      end
+      collection do
+        get 'update_status'
+      end
+    end
   end
   get '/*path', to: 'projects#index'
 

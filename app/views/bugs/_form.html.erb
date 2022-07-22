@@ -1,0 +1,35 @@
+<%= form_with(model: [@project, bug], local: true) do |form| %>
+  <% if bug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bug.errors.count, "error") %> prohibited this project from being saved:</h2>
+      <ul>
+      <% bug.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :title,  class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :deadline,  class: "form-label" %>
+    <%= form.date_field :deadline, class: "form-control" %>
+  </div>
+    <div class="field">
+    <%= form.label :ss_image %>
+    <%= form.file_field :ss_image, direct_upload: true  %>
+  </div>
+  <div class="form-group", id="bugs">
+    <%= form.label :bug_type,  class: "form-label" %>
+    <%= select_tag 'bug[bug_type]', options_for_select(Bug.bug_types.map {|k, v| [k.humanize.capitalize, v]}), prompt: "Enter type", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :status,  class: "form-label" %>
+    <%= select_tag 'bug[status]', options_for_select([]), prompt: "Enter status",  class: "form-control 'd-none",  id: "status" %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

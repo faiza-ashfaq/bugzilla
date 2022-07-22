@@ -1,0 +1,3 @@
+$("#dev_bug_table").append("<tr><%= j render @bug %></tr>");
+var element = document.querySelector("#bug_1_" + <%= @bug.id %>);
+element.remove();

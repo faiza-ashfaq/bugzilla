@@ -1,0 +1,7 @@
+<h1>Bugs</h1>
+
+<% if developer_signed_in? %>
+ <%= render 'devindex' %>
+<% elsif qa_signed_in? %>
+ <%= render 'qaindex' %>
+ <%end%>

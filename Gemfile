@@ -34,13 +34,17 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'active_storage_validations'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
+gem 'cloudinary'
 gem 'devise'
+gem 'figaro'
 gem 'jquery-rails'
 gem 'pg'
 gem 'pundit'
 gem 'sassc-rails'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'

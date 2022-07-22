@@ -1,0 +1,26 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Title</th>
+      <th>Project</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+    <% @bugs.each do |bug| %>
+    <tbody id="delBug<%= bug.id %>">
+      <tr>
+        <td><%= bug.title %></td>
+        <td><%= bug.project.name %></td>
+        <td><%= link_to 'Show Project', [@project] %></td>
+        <td><%= link_to 'Show', project_bug_path(@project, bug) %></td>
+        <td><%= link_to 'Edit Bug', edit_project_bug_path(@project, bug) %></td>
+        <td><%= link_to 'Destroy Bug', [@project, bug], method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bug', new_project_bug_path(@project) %>

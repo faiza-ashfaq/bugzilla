@@ -21,7 +21,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    # byebug
     return true if user.manager? && user == project.user
   end
 

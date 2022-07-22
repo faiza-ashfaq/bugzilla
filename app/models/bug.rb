@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class Bug < ApplicationRecord
+  attr_accessor :remove_ss_image
+
   # VALIDATIONS
   validates :title, uniqueness: true
   validates :title, :status, :bug_type, presence: true
-  validates_with BugValidator
+  validates :ss_image, attached: false, content_type: %i[png gif]
+  validates_with BugValidator, unless: :has_reporter? || :has_assignee?
 
   # ENUMS
   enum bug_type: { feature: 0, bug: 1 }
@@ -13,5 +16,18 @@ class Bug < ApplicationRecord
   # ASSOCIATIONS
   belongs_to :project
   belongs_to :reporter, class_name: 'User'
-  belongs_to :assignee, class_name: 'User'
+  belongs_to :assignee, class_name: 'User', optional: true
+  has_one_attached :ss_image
+
+  # SCOPES
+  scope :has_not_ended, -> { where.not(status: Bug.statuses[:ended]) }
+
+  # FUNCTIONS
+  def has_reporter?
+    reporter.present?
+  end
+
+  def has_assignee?
+    assignee.present?
+  end
 end

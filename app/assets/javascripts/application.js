@@ -17,3 +17,29 @@
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on("change", "#bugs", function(){
+  let bugs = $("#bugs :selected").text();
+ // console.log(bugs)
+  $.ajax({
+    url: "/projects/1/bugs/update_status",
+    method: "GET",
+    dataType: "json",
+    data: {bugs: bugs},
+    error: function (xhr, status, error) {
+      console.error('AJAX Error: ' + status + error);
+    },
+    success: function (response) {
+      console.log(response);
+      var status = response["status"];
+      $("#status").empty();
+      $('#status').removeClass('d-none')
+      $("#status").append('<option>Select status</option>');
+      jQuery.each(status, function (name, value) {
+        $('#status').append('<option value="' + value + '">' + name + '</option>');
+    });
+
+    }
+  });
+});
+

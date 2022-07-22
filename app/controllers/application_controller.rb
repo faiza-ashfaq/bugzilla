@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
   devise_group :user, contains: %i[managers developers qa]
 
   def pundit_user
