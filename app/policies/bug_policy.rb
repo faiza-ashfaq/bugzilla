@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class ProjectPolicy < ApplicationPolicy
-  attr_reader :user, :project
+class BugPolicy < ApplicationPolicy
+  attr_reader :user, :bug
 
-  def initialize(user, _project)
+  def initialize(user, bug)
     @user = user
     @bug = bug
   end
@@ -26,5 +26,13 @@ class ProjectPolicy < ApplicationPolicy
 
   def destroy?
     return true if user.qa? && user == bug.user
+  end
+
+  def resolve
+    user.developer?
+  end
+
+  def assign_dev
+    user.developer?
   end
 end

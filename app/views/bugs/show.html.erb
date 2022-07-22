@@ -1,8 +1,44 @@
-<%= @bug.title %>
+<div class="container">
+<p>
+  <strong>Title:</strong>
+  <%= @bug.title %>
+</p>
 
-<% if @bug.ss_image.attached? %>
-<%= cl_image_tag(@bug.ss_image.key, width: 300, height: 200) %>
-<% end %>
+<p>
+  <strong>Type:</strong>
+  <%= @bug.bug_type %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @bug.status %>
+</p>
+
+
+<p>
+  <strong>Reporter:</strong>
+  <%= @bug.reporter.username %>
+</p>
+
+<p>
+  <strong>Assignee:</strong>
+  <% if @bug.assignee.present? %>
+    <%= @bug.assignee.username %>
+  <% else %>
+    Not assigned yet
+  <% end %>
+</p>
+
+<p>
+  <strong>Assignee:</strong>
+  <% if @bug.ss_image.attached? %>
+    <%= cl_image_tag(@bug.ss_image.key, width: 300, height: 200) %>
+  <% else %>
+    No image attached
+  <% end %>
+</p>
+
+</div>
 
 <%= link_to 'Edit', edit_project_bug_path(@project, @bug) %> |
 <%= link_to 'Back', root_path %>

@@ -6,7 +6,7 @@ class Bug < ApplicationRecord
   # VALIDATIONS
   validates :title, uniqueness: true
   validates :title, :status, :bug_type, presence: true
-  validates :ss_image, attached: false, content_type: [:png, :gif]#, :message => "Only gif and png files are allowed for screenshots"
+  validates :ss_image, attached: false, content_type: %i[png gif]
   validates_with BugValidator, unless: :has_reporter? || :has_assignee?
 
   # ENUMS
@@ -18,6 +18,9 @@ class Bug < ApplicationRecord
   belongs_to :reporter, class_name: 'User'
   belongs_to :assignee, class_name: 'User', optional: true
   has_one_attached :ss_image
+
+  # SCOPES
+  scope :has_not_ended, -> { where.not(status: Bug.statuses[:ended]) }
 
   # FUNCTIONS
   def has_reporter?

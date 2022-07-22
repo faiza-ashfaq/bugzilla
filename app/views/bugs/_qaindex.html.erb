@@ -15,7 +15,7 @@
         <td><%= link_to 'Show Project', [@project] %></td>
         <td><%= link_to 'Show', project_bug_path(@project, bug) %></td>
         <td><%= link_to 'Edit Bug', edit_project_bug_path(@project, bug) %></td>
-        <td><%= link_to 'Destroy Bug', [@project, bug], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy Bug', [@project, bug], method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
